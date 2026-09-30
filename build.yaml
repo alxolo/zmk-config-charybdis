@@ -17,12 +17,12 @@ include:
   shield: dongle_prospector prospector_adapter
   snippet: studio-rpc-usb-uart
   cmake-args: -DCONFIG_ZMK_STUDIO=y
-# YADS Prospector dongle - disabled pending zmk-dongle-screen Zephyr 4.1 fix
-# See: https://github.com/janpfischer/zmk-dongle-screen/issues/29
-# - board: xiao_ble
-#   shield: dongle_yads_prospector dongle_screen
-#   snippet: studio-rpc-usb-uart
-#   cmake-args: -DCONFIG_ZMK_STUDIO=y
+# ZDSE Prospector dongle - zmk-dongle-screen-engine with Neon Cat theme
+- board: xiao_ble//zmk
+  shield: dongle_zdse_prospector dongle_screen_host
+  snippet: studio-rpc-usb-uart
+  cmake-args: -DCONFIG_ZMK_STUDIO=y
+  artifact-name: zdse_neon_cat_prospector
 
 # Dongle mode - nice_nano dongle with OLED display
 - board: nice_nano//zmk

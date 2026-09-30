@@ -210,7 +210,7 @@ def copy_firmware_to_output(workspace_path, build_dir, shield_name, board_name):
     # Generate output filename: shield-board.uf2
     # Replace underscores with hyphens for consistency
     shield_clean = shield_name.replace('_', '-')
-    board_clean = board_name.replace('_', '-')
+    board_clean = board_name.replace('_', '-').replace('/', '-')
     output_filename = f"{shield_clean}-{board_clean}.uf2"
     output_file = output_dir / output_filename
 
