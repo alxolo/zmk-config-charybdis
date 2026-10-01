@@ -28,6 +28,8 @@ If you want RGB lighting, add the following optional parts (based on BastardKB's
 
 **Firmware**: boards built with these parts should use the `_rgb` shield variant firmware (e.g. `charybdis_left_rgb`, `charybdis_right_standalone_rgb`, `dongle_charybdis_right_rgb`). See [RGB LED Configuration](/readme.md#rgb-led-configuration).
 
+**Battery note**: on the right (trackball) half, the LED strip shares its power rail with the trackball, so the hard `EXT_POWER` cut would also disable the trackball — this repo therefore uses software-only `RGB_OFF`, which does not stop the LEDs' idle current draw. For real power savings, wire a physical switch into the LED power line (LEDs only, not the shared rail) — see the [warning in RGB LED Configuration](/readme.md#rgb-led-configuration).
+
 | Part name                      | Amount (4x6) | Notes                  |
 | ----------------------------- | ------------ | ---------------------- |
 | SK6812 Mini-E LEDs            | 58           | Optional RGB LEDs      |

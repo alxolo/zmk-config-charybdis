@@ -415,6 +415,11 @@ Each `_rgb` overlay just includes the base overlay plus `charybdis_rgb.dtsi`; `S
 
 With an `_rgb` build, underglow starts on at boot in the rainbow (spectrum) effect at 25% brightness (see [`config/charybdis.conf`](/config/charybdis.conf)). RGB keys on the raise layer (`RGB_ON/OFF/BRI/BRD/EFF/HUI`) work from either half and stay in sync via the custom `rgb_loc` behavior — including when a dongle without LEDs is the central.
 
+> [!WARNING]
+> **Software "off" is not power off (right/trackball side).** On the right half, the LED strip's power rail is shared with the trackball, and the nice!nano has no dedicated power-management pin for the LEDs. ZMK's hard power cut (`EXT_POWER`) would also kill the trackball — which is why this repo sets `CONFIG_ZMK_RGB_UNDERGLOW_EXT_POWER=n` (see [RGB Off/On Reliability](#rgb-offon-reliability)). The consequence: `RGB_OFF` only stops the data signal, and WS2812/SK6812 LEDs keep drawing significant idle current per LED (driver IC quiescent current) even when fully "off", noticeably shortening battery life.
+>
+> If battery life matters, the recommended mod is a **physical switch on the LED power wire** — between the controller and the strip only, not the shared rail, so the trackball keeps running while the LEDs are hard-powered off.
+
 ### RGB Off/On Reliability
 
 If LEDs turn off but do not turn back on reliably with `RGB_ON` (until reset), set:
