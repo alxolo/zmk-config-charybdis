@@ -26,6 +26,8 @@
 
 If you want RGB lighting, add the following optional parts (based on BastardKB's original `electronics_bom.md`):
 
+**Firmware**: boards built with these parts should use the `_rgb` shield variant firmware (e.g. `charybdis_left_rgb`, `charybdis_right_standalone_rgb`, `dongle_charybdis_right_rgb`). See [RGB LED Configuration](/readme.md#rgb-led-configuration).
+
 | Part name                      | Amount (4x6) | Notes                  |
 | ----------------------------- | ------------ | ---------------------- |
 | SK6812 Mini-E LEDs            | 58           | Optional RGB LEDs      |

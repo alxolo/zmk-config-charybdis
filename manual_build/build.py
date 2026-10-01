@@ -126,6 +126,8 @@ def build_docker_command(build_config, workspace_path):
     west_commands.append('rm -rf /workspace/zmk-config-charybdis && mkdir -p /workspace/zmk-config-charybdis/zephyr')
     west_commands.append('if [ -d /repo/boards ]; then cp -R /repo/boards /workspace/zmk-config-charybdis/; fi')
     west_commands.append('if [ -d /repo/dts ]; then cp -R /repo/dts /workspace/zmk-config-charybdis/; fi')
+    west_commands.append('if [ -d /repo/src ]; then cp -R /repo/src /workspace/zmk-config-charybdis/; fi')
+    west_commands.append('if [ -f /repo/CMakeLists.txt ]; then cp /repo/CMakeLists.txt /workspace/zmk-config-charybdis/; fi')
     west_commands.append('if [ -f /repo/zephyr/module.yml ]; then cp /repo/zephyr/module.yml /workspace/zmk-config-charybdis/zephyr/module.yml; fi')
 
     # Init the west workspace at /workspace, using the copied local manifest repo at /workspace/config.

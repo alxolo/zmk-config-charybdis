@@ -104,27 +104,45 @@ Then it runs:
 
 === Available Build Configurations ===
 
-1. charybdis_left (nice_nano_v2)
+1. charybdis_left (nice_nano//zmk)
 
-2. charybdis_right_standalone (nice_nano_v2)
+2. charybdis_left_rgb (nice_nano//zmk)
+
+3. charybdis_right_standalone (nice_nano//zmk)
    └─ Snippet: studio-rpc-usb-uart
    └─ CMake args: -DCONFIG_ZMK_STUDIO=y
 
-3. dongle_charybdis_right (nice_nano_v2)
-
-4. dongle_prospector prospector_adapter (seeeduino_xiao_ble)
+4. charybdis_right_standalone_rgb (nice_nano//zmk)
    └─ Snippet: studio-rpc-usb-uart
    └─ CMake args: -DCONFIG_ZMK_STUDIO=y
 
-5. dongle_nice dongle_display (nice_nano_v2)
+5. dongle_charybdis_right (nice_nano//zmk)
+
+6. dongle_charybdis_right_rgb (nice_nano//zmk)
+
+7. dongle_prospector prospector_adapter (xiao_ble//zmk)
    └─ Snippet: studio-rpc-usb-uart
    └─ CMake args: -DCONFIG_ZMK_STUDIO=y
 
-6. settings_reset (nice_nano_v2)
+8. dongle_zdse_prospector dongle_screen_host (xiao_ble//zmk)
+   └─ Snippet: studio-rpc-usb-uart
+   └─ CMake args: -DCONFIG_ZMK_STUDIO=y
 
-7. settings_reset (seeeduino_xiao_ble)
+9. dongle_nice_32 dongle_display (nice_nano//zmk)
+   └─ Snippet: studio-rpc-usb-uart
+   └─ CMake args: -DCONFIG_ZMK_STUDIO=y
 
-Select build configuration (1-6) or 'q' to quit:
+10. dongle_nice_64 dongle_display (nice_nano//zmk)
+   └─ Snippet: studio-rpc-usb-uart
+   └─ CMake args: -DCONFIG_ZMK_STUDIO=y
+
+11. settings_reset (nice_nano//zmk)
+
+12. settings_reset (xiao_ble//zmk)
+
+13. tester_pro_micro (nice_nano//zmk)
+
+Select build configuration (1-13) or 'q' to quit:
 ```
 
 ## Output Location

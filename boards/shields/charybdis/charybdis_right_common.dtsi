@@ -75,7 +75,3 @@
         /* NOTE: apply this mode if you need 250Hz with direct USB connection. */
     };
 };
-
-#define CHARYBDIS_RGB_CHAIN_LENGTH 27
-#include "charybdis_rgb.dtsi"
-#undef CHARYBDIS_RGB_CHAIN_LENGTH

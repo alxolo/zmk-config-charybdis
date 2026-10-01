@@ -32,6 +32,7 @@ This configuration supports two modes:
     - [Self Section](#self-section)
   - [Keymap](#keymap)
   - [RGB LED Configuration](#rgb-led-configuration)
+    - [RGB Shield Variants](#rgb-led-configuration)
     - [RGB Off/On Reliability](#rgb-offon-reliability)
     - [Change LED Data Pin](#change-led-data-pin)
     - [Change LED Count Per Side](#change-led-count-per-side)
@@ -115,10 +116,16 @@ zmk-config-charybdis/
 │       │   ├── charybdis_right_common.dtsi           # Shared right keyboard hardware config
 │       │   ├── charybdis_left.conf                   # Left side Kconfig options (left-specific only)
 │       │   ├── charybdis_left.overlay                # Left side device tree overlay
+│       │   ├── charybdis_left_rgb.conf               # Left RGB variant Kconfig (comment only)
+│       │   ├── charybdis_left_rgb.overlay            # Left RGB variant (base overlay + LED strip)
 │       │   ├── charybdis_right_standalone.conf       # Right side Kconfig (standalone mode)
 │       │   ├── charybdis_right_standalone.overlay    # Right side overlay (standalone mode)
+│       │   ├── charybdis_right_standalone_rgb.conf   # Symlink → charybdis_right_standalone.conf
+│       │   ├── charybdis_right_standalone_rgb.overlay # Right standalone RGB variant (+ LED strip)
 │       │   ├── dongle_charybdis_right.conf           # Symlink → charybdis_right_standalone.conf
 │       │   ├── dongle_charybdis_right.overlay        # Right side overlay (dongle mode)
+│       │   ├── dongle_charybdis_right_rgb.conf       # Symlink → charybdis_right_standalone.conf
+│       │   ├── dongle_charybdis_right_rgb.overlay    # Right dongle-mode RGB variant (+ LED strip)
 │       │   ├── dongle_common.dtsi                    # Base shared dongle config (all variants)
 │       │   ├── dongle_nice_common.dtsi               # Nice!Nano platform common config
 │       │   ├── dongle_prospector_common.dtsi         # Prospector platform common config
@@ -199,6 +206,7 @@ zmk-config-charybdis/
 - **`charybdis_left.overlay`**: Left side configuration (same for both modes)
 - **`charybdis_right_standalone.overlay`**: Right side for **standalone mode** (processes trackball locally)
 - **`dongle_charybdis_right.overlay`**: Right side for **dongle mode** (forwards trackball to dongle)
+- **`*_rgb.overlay` variants**: Thin wrappers that include the base overlay plus `charybdis_rgb.dtsi` (LED strip on spi3). Use these when the optional RGB LEDs are installed - see [RGB LED Configuration](#rgb-led-configuration)
 - **`dongle_common.dtsi`**: Base shared configuration for all dongle variants (matrix, input split, physical layout)
 - **`dongle_nice_common.dtsi`**: Nice!Nano platform-specific common config (KSCAN, I2C)
 - **`dongle_prospector_common.dtsi`**: Prospector platform-specific common config (KSCAN)
@@ -395,6 +403,18 @@ Generated with [Keymap Drawer](https://github.com/caksoylar/keymap-drawer-web/)
 
 ## RGB LED Configuration
 
+RGB underglow is **opt-in via shield variants**. The base keyboard shields assume no LED hardware; the `_rgb` variants add the WS2812/SK6812 strip (spi3 MOSI on `P1.13`, nice!nano `D15`):
+
+| Base shield (no LEDs) | RGB variant | Side / mode |
+|---|---|---|
+| `charybdis_left` | `charybdis_left_rgb` | Left (both modes) |
+| `charybdis_right_standalone` | `charybdis_right_standalone_rgb` | Right, standalone central |
+| `dongle_charybdis_right` | `dongle_charybdis_right_rgb` | Right, dongle-mode peripheral |
+
+Each `_rgb` overlay just includes the base overlay plus `charybdis_rgb.dtsi`; `SPI`/`LED_STRIP`/`ZMK_RGB_UNDERGLOW` defaults are gated on the `_rgb` shields in [`Kconfig.defconfig`](/boards/shields/charybdis/Kconfig.defconfig). Flash the `_rgb` firmware to **both** halves when LEDs are installed.
+
+With an `_rgb` build, underglow starts on at boot in the rainbow (spectrum) effect at 25% brightness (see [`config/charybdis.conf`](/config/charybdis.conf)). RGB keys on the raise layer (`RGB_ON/OFF/BRI/BRD/EFF/HUI`) work from either half and stay in sync via the custom `rgb_loc` behavior — including when a dongle without LEDs is the central.
+
 ### RGB Off/On Reliability
 
 If LEDs turn off but do not turn back on reliably with `RGB_ON` (until reset), set:
@@ -442,11 +462,11 @@ Current default is Pro Micro `D15` on nice!nano v2 (`P1.13`).
 
 ### Change LED Count Per Side
 
-The per-side LED count is set where the shared RGB include is used:
+The per-side LED count is set in the `_rgb` variant overlays where the shared RGB include is used:
 
-- Left side: [`boards/shields/charybdis/charybdis_left.overlay`](/boards/shields/charybdis/charybdis_left.overlay)  
+- Left side: [`boards/shields/charybdis/charybdis_left_rgb.overlay`](/boards/shields/charybdis/charybdis_left_rgb.overlay)  
   `#define CHARYBDIS_RGB_CHAIN_LENGTH 29`
-- Right side: [`boards/shields/charybdis/charybdis_right_common.dtsi`](/boards/shields/charybdis/charybdis_right_common.dtsi)  
+- Right side: [`boards/shields/charybdis/charybdis_right_standalone_rgb.overlay`](/boards/shields/charybdis/charybdis_right_standalone_rgb.overlay) and [`boards/shields/charybdis/dongle_charybdis_right_rgb.overlay`](/boards/shields/charybdis/dongle_charybdis_right_rgb.overlay)  
   `#define CHARYBDIS_RGB_CHAIN_LENGTH 27`
 
 ## Trackball Sensitivity Configuration
@@ -584,8 +604,11 @@ This combo is defined in [`config/charybdis.keymap`](/config/charybdis.keymap) a
 Push changes to your repository and GitHub Actions will automatically build firmware for all configurations defined in [`build.yaml`](/build.yaml). Firmware files will be available in the Actions artifacts as a `firmware.zip` file containing:
 
 - `charybdis_left-nice_nano-zmk.uf2`
+- `charybdis_left_rgb-nice_nano-zmk.uf2`
 - `charybdis_right_standalone-nice_nano-zmk.uf2`
+- `charybdis_right_standalone_rgb-nice_nano-zmk.uf2`
 - `dongle_charybdis_right-nice_nano-zmk.uf2`
+- `dongle_charybdis_right_rgb-nice_nano-zmk.uf2`
 - `dongle_prospector prospector_adapter-xiao_ble-zmk.uf2`
 - `dongle_zdse_prospector dongle_screen_host-xiao_ble-zmk.uf2`
 - `dongle_nice_32 dongle_display-nice_nano-zmk.uf2`
@@ -601,14 +624,17 @@ For local building using Docker, see [`manual_build/BUILD_README.md`](/manual_bu
 The interactive build script provides options for:
 
 1. **charybdis_left** - Left keyboard (works with both modes)
-2. **charybdis_right_standalone** - Right keyboard for standalone mode (Nice!Nano)
-3. **dongle_charybdis_right** - Right keyboard for dongle mode (Nice!Nano)
-4. **dongle_prospector prospector_adapter** - Dongle with Prospector display (XIAO BLE)
-5. **dongle_zdse_prospector dongle_screen_host** - Dongle with ZDSE Neon Cat theme (XIAO BLE)
-6. **dongle_nice_32 dongle_display** - Nice!Nano dongle with 128x32 OLED
-7. **dongle_nice_64 dongle_display** - Nice!Nano dongle with 128x64 OLED
-8. **tester_pro_micro** - GPIO pin tester for Pro Micro-compatible boards
-9. **settings_reset** - Reset stored settings
+2. **charybdis_left_rgb** - Left keyboard with RGB underglow
+3. **charybdis_right_standalone** - Right keyboard for standalone mode (Nice!Nano)
+4. **charybdis_right_standalone_rgb** - Right keyboard for standalone mode with RGB underglow
+5. **dongle_charybdis_right** - Right keyboard for dongle mode (Nice!Nano)
+6. **dongle_charybdis_right_rgb** - Right keyboard for dongle mode with RGB underglow
+7. **dongle_prospector prospector_adapter** - Dongle with Prospector display (XIAO BLE)
+8. **dongle_zdse_prospector dongle_screen_host** - Dongle with ZDSE Neon Cat theme (XIAO BLE)
+9. **dongle_nice_32 dongle_display** - Nice!Nano dongle with 128x32 OLED
+10. **dongle_nice_64 dongle_display** - Nice!Nano dongle with 128x64 OLED
+11. **tester_pro_micro** - GPIO pin tester for Pro Micro-compatible boards
+12. **settings_reset** - Reset stored settings
 
 Note: Local builds use a dedicated workspace under `manual_build/west-workspace/` and should behave the same as CI. If a specific configuration fails locally, prefer building in GitHub Actions and then iterate locally once the dependency/workspace is stable.
 
@@ -628,8 +654,8 @@ Built firmware files are automatically copied to `manual_build/artifacts/output/
 #### Flashing checklist (reset settings first)
 
 1. Flash `settings_reset-nice_nano-zmk.uf2` to **both** keyboards
-2. Flash `charybdis_left-nice_nano-zmk.uf2` to the left keyboard
-3. Flash `charybdis_right_standalone-nice_nano-zmk.uf2` to the right keyboard
+2. Flash `charybdis_left-nice_nano-zmk.uf2` to the left keyboard (or `charybdis_left_rgb-nice_nano-zmk.uf2` if RGB LEDs are installed)
+3. Flash `charybdis_right_standalone-nice_nano-zmk.uf2` to the right keyboard (or `charybdis_right_standalone_rgb-nice_nano-zmk.uf2` if RGB LEDs are installed)
 4. The keyboards will automatically pair with each other
 
 ### Flashing (Dongle Mode)
@@ -655,8 +681,8 @@ Built firmware files are automatically copied to `manual_build/artifacts/output/
         - **128x64 OLED**: `dongle_nice_64 dongle_display-nice_nano-zmk.uf2`
       - Connect OLED display to dongle via I2C (SDA→Pin 2, SCL→Pin 3)
 
-2. Flash `charybdis_left-nice_nano-zmk.uf2` to the left keyboard
-3. Flash `dongle_charybdis_right-nice_nano-zmk.uf2` to the right keyboard
+2. Flash `charybdis_left-nice_nano-zmk.uf2` to the left keyboard (or `charybdis_left_rgb-nice_nano-zmk.uf2` if RGB LEDs are installed)
+3. Flash `dongle_charybdis_right-nice_nano-zmk.uf2` to the right keyboard (or `dongle_charybdis_right_rgb-nice_nano-zmk.uf2` if RGB LEDs are installed)
 4. **Important**: Pair the left keyboard to the dongle first, then pair the right keyboard (paring occurs when reset firmware is flashed prior to main firmware). Just ensure to follow two previous steps in order (left first, then right) and the battery status will display correctly on the dongle.
 
 ### Tester Pro Micro (GPIO Testing)
