@@ -1,11 +1,11 @@
 ---
 include:
 # Left keyboard - same for all modes (always peripheral)
-- board: nice_nano_v2//zmk
+- board: nice_nano//zmk
   shield: charybdis_left
 
 # Standalone mode - right keyboard is primary/central
-- board: nice_nano_v2//zmk
+- board: nice_nano//zmk
   shield: charybdis_right_standalone
   snippet: studio-rpc-usb-uart
   cmake-args: -DCONFIG_ZMK_STUDIO=y
@@ -35,7 +35,7 @@ include:
 #  cmake-args: -DCONFIG_ZMK_STUDIO=y
 
 # Settings reset for both board types
-- board: nice_nano_v2//zmk
+- board: nice_nano//zmk
   shield: settings_reset
 #- board: xiao_ble//zmk
 #  shield: settings_reset
