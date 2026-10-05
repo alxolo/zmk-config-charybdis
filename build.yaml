@@ -40,7 +40,7 @@ include:
 #- board: xiao_ble//zmk
 #  shield: settings_reset
 
-# Tester Pro Micro
-- board: nice_nano//zmk # Replace with the Pro Micro-compatible board you're using
-  shield: tester_pro_micro
-  format: bt
+## Tester Pro Micro
+#- board: nice_nano//zmk # Replace with the Pro Micro-compatible board you're using
+#  shield: tester_pro_micro
+#  format: bt
