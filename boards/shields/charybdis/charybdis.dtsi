@@ -104,19 +104,18 @@ RC(3,0) RC(3,1) RC(3,2) RC(3,3) RC(3,4) RC(3,5)  RC(3,6) RC(3,7) RC(3,8) RC(3,9)
 
             // Thumb Clusters
             // Keys array order matches keymap bindings (positions 48-55)
-            // Left thumb bindings: 48=LALT, 49=LOWER, 50=POINTER, 51=gui_ctrlb, 52=LCTRL
-            // Right thumb bindings: 53=RET, 54=SYMBOLS, 55=RAISE
-            // Physical coordinates per actual key positions from keymap comments
-            //                       w   h    x    y     rot    rx    ry
-            , <&key_physical_attrs 100 100  518  420    1500   398   790>  // 48 (LALT) - physical: 3rd from left
-            , <&key_physical_attrs 100 100  482  520    1500   398   790>  // 49 (LOWER) - physical: 5th from left
-            , <&key_physical_attrs 100 100  348  414    900    398   790>  // 50 (POINTER) - physical: 1st from left
-            , <&key_physical_attrs 100 100  418  414    1500   398   790>  // 51 (gui_ctrlb) - physical: 2nd from left
-            , <&key_physical_attrs 100 100  382  514    1500   398   790>  // 52 (LCTRL) - physical: 4th from left
-            , <&key_physical_attrs 100 100 1052  520 (-3000)  1102   790>  // 53 (RET) - physical: 3rd from right (bottom)
-            , <&key_physical_attrs 100 100 1067  414 (-1500)  1102   790>  // 54 (SYMBOLS) - physical: 2nd from right (top)
-            , <&key_physical_attrs 100 100 1052  420 (-3000)  1102   790>  // 55 (RAISE) - physical: 1st from right (top)
-            ;
+           //                       w   h    x    y     rot    rx    ry
+           // Left side
+           , <&key_physical_attrs 100 100  348  414    900    398   790>  // 48 - physical: 1st from left
+           , <&key_physical_attrs 100 100  418  414    1500   398   790>  // 49 - physical: 2nd from left
+           , <&key_physical_attrs 100 100  518  420    1500   398   790>  // 50 - physical: 3rd from left
+           , <&key_physical_attrs 100 100  382  514    1500   398   790>  // 51 - physical: 4th from left (1st from left in bottom row)
+           , <&key_physical_attrs 100 100  482  520    1500   398   790>  // 52  - physical: 5th from left (2nd from left in bottom row)
+           // Right side
+           , <&key_physical_attrs 100 100 1052  520 (-3000)  1102   790>  // 53 - physical: 3rd from right (bottom row)
+           , <&key_physical_attrs 100 100 1052  420 (-3000)  1102   790>  // 54 - physical: 2nd from right (1st from left in top row)
+           , <&key_physical_attrs 100 100 1067  414 (-1500)  1102   790>  // 55 - physical: 1st from right (2nd from left in top row)
+           ;
     };
 
     charybdis_position_map {
