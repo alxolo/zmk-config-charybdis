@@ -196,11 +196,11 @@
     &kp LSFT      &hml LGUI Z   &hml LALT X   &hml LCTRL C  &hml LSHIFT V &kp B             &kp N         &hmr RSHIFT M &hmr RCTRL COMMA &hmr RALT DOT &hmr RGUI FSLH &kp RSFT
 // ╰─────────────┴─────────────┴─────────────┴─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────┴─────────────┴─────────────┴─────────────╯
 //               ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────╮
-                   &mo POINTER    &gui_ctrlb   &lalt_dt       &kp LCTRL     &mo LOWER         &kp RET      &blt RAISE BSPC &blt SYMBOLS SPACE
+                   &mo POINTER    &gui_ctrlb   &lalt_dt       &kp LCTRL     &mo LOWER         &kp RET      &blt RAISE BSPC &blt SYMBOLS SPACE &none &none &none
 //               ╰─────────────┴─────────────┴─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
       >;
     };
-
+fa
     pointer_layer {
       label = "POINTER";
       display-name = "Pointer";
