@@ -36,17 +36,6 @@
 
 / {
   behaviors {
-    // Hold-tap behavior for layer with tap-preferred
-    blt: blt {
-      compatible = "zmk,behavior-hold-tap";
-      #binding-cells = <2>;
-      flavor = "tap-preferred";
-      tapping-term-ms = <200>;
-      quick-tap-ms = <300>;
-      require-prior-idle-ms = <100>;
-      bindings = <&mo>, <&kp>;
-    };
-
     // Tap-dance for GUI/Ctrl+B
     gui_ctrlb: gui_ctrlb {
       compatible = "zmk,behavior-tap-dance";
