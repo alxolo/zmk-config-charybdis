@@ -83,10 +83,10 @@
     timeout-ms = <25>;
     require-prior-idle-ms = <140>;
 
-    // Gaming layer toggle combo - keys 49, 55, 54
+    // Gaming layer toggle combo - keys 52, 54, 55
     combo_gaming_toggle {
       timeout-ms = <50>;
-      key-positions = <49 55 54>;
+      key-positions = <52 54 55>;
       bindings = <&tog GAMING>;
     };
 
