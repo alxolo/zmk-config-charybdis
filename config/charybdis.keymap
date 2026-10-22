@@ -83,6 +83,12 @@
     timeout-ms = <25>;
     require-prior-idle-ms = <140>;
 
+    // Instant Evil Exit: Strike J and K together to generate ESC
+    combo_evil_esc {
+      key-positions = <31 32>; // J and K matrix keys
+      bindings = <&kp ESC>;
+    };
+
     // Gaming layer toggle combo - keys 52, 54, 55
     combo_gaming_toggle {
       timeout-ms = <50>;
