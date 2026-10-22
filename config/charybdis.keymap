@@ -89,6 +89,12 @@
       bindings = <&kp ESC>;
     };
 
+    // Fast Inline Emacs Input Method Toggle (Ctrl + \)
+    combo_emacs_lang {
+      key-positions = <32 33>; // K and L matrix keys
+      bindings = <&kp LC(BSLH)>;
+    };
+
     // Gaming layer toggle combo - keys 52, 54, 55
     combo_gaming_toggle {
       timeout-ms = <50>;
