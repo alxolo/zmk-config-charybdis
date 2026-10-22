@@ -80,8 +80,8 @@
 
   combos {
     compatible = "zmk,combos";
-    timeout-ms = <20>;
-    require-prior-idle-ms = <250>;
+    timeout-ms = <25>;
+    require-prior-idle-ms = <140>;
 
     // Studio Unlock Combo - all three right thumb keys
     combo_studio_unlock {
