@@ -279,3 +279,27 @@
     };
   };
 };
+
+/*
+ * Charybdis Trackball Event Processor Fine-Tuning
+ * Maps structural layer states to specialized sensor scales
+ */
+&trackball_listener {
+    compatible = "zmk,input-listener";
+    device = <&trackball>;
+
+    // SNIPING Layer Resolution Downscaler
+    sniper_mod {
+        layers = <6>; // Explicitly binds to your SNIPING layer index (6)
+        input-processors = <&zip_xy_scaler 1 4>; // Scales movements to 25% velocity
+    };
+
+    // SCROLL Layer Mapper and Axis Pacing Optimizer
+    scroller_mod {
+        layers = <5>; // Explicitly binds to your SCROLL layer index (5)
+        input-processors = <
+            &zip_xy_to_scroll_mapper   // Re-routes rolling coordinates into scrolling wheels
+            &zip_scroll_scaler 1 3     // Controls step velocity (reduces scroll tracking by 66%)
+        >;
+    };
+};
