@@ -36,22 +36,6 @@
 
 / {
   behaviors {
-    // Tap-dance for GUI/Ctrl+B
-    gui_ctrlb: gui_ctrlb {
-      compatible = "zmk,behavior-tap-dance";
-      #binding-cells = <0>;
-      tapping-term-ms = <200>;
-      bindings = <&kp LGUI>, <&kp LC(B)>;
-    };
-
-    // Tap/hold Alt, double-tap Ctrl+Shift+Z
-    lalt_dt: lalt_dt {
-      compatible = "zmk,behavior-tap-dance";
-      #binding-cells = <0>;
-      tapping-term-ms = <200>;
-      bindings = <&kp LALT>, <&kp LC(LS(Z))>;
-    };
-
     // Home row mods - Left hand
     hml: home_row_mod_left {
       compatible = "zmk,behavior-hold-tap";
