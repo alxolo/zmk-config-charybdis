@@ -83,13 +83,6 @@
     timeout-ms = <25>;
     require-prior-idle-ms = <140>;
 
-    // Studio Unlock Combo - all three right thumb keys
-    combo_studio_unlock {
-      timeout-ms = <50>;
-      key-positions = <53 54 55>;
-      bindings = <&studio_unlock>;
-    };
-
     // Gaming layer toggle combo - keys 49, 55, 54
     combo_gaming_toggle {
       timeout-ms = <50>;
