@@ -98,7 +98,7 @@
     };
 
     // Right hand
-    combo_esc_left {
+    combo_esc_right {
       timeout-ms = <50>;
       key-positions = <31 32>; // J and K matrix keys
       bindings = <&kp ESC>;
